@@ -1,0 +1,18 @@
+{
+  "version": "1.0.0-*",
+
+  "dependencies": {
+    "Bank.Communication.Application.Contract": "1.0.0-*",
+    "Bank.Communication.Domain": "1.0.0-*",
+    "Bank.Communication.Domain.Contract": "1.0.0-*",
+    "Bank.Communication.Infrastructure": "1.0.0-*",
+    "Bank.Communication.Infrastructure.Contract": "1.0.0-*",
+    "NETStandard.Library": "1.6.0"
+  },
+
+  "frameworks": {
+    "netstandard1.6": {
+      "imports": "dnxcore50"
+    }
+  }
+}

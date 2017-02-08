@@ -1,0 +1,117 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{FEF3D540-6E10-4A6B-8C55-A341F8FCF6A0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D686054B-A69D-4618-A0A5-AD29F8795114}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Bank.Server.Communication", "src\Bank.Server.Communication\Bank.Server.Communication.xproj", "{221C9387-6828-4DA1-9710-B384F40C46C9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{F8BC95AA-36BB-47AB-A5CE-8FD372665916}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{2158BD14-B47D-48D6-B73B-CB1A0136ADF9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{E69B92B1-9D82-48AB-8E5B-1F06A0F285E3}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Bank.Communication.Infrastructure", "Infrastructure\Bank.Communication.Infrastructure\Bank.Communication.Infrastructure.xproj", "{B3A6F9A7-A107-4107-A2D9-9EE3F0D2CF0C}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Bank.Communication.Infrastructure.Contract", "Infrastructure\Bank.Communication.Infrastructure.Contract\Bank.Communication.Infrastructure.Contract.xproj", "{39B84F5A-1A43-4812-A294-D1400D627253}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Bank.Communication.Domain", "Domain\Bank.Communication.Domain\Bank.Communication.Domain.xproj", "{2A8BE4B3-6888-4693-86C8-55B86B97F10C}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Bank.Communication.Domain.Contract", "Domain\Bank.Communication.Domain.Contract\Bank.Communication.Domain.Contract.xproj", "{D88C7F94-3890-470F-9A18-6DB3C2C80AA1}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Bank.Communication.Application", "Application\Bank.Communication.Application\Bank.Communication.Application.xproj", "{60D4B164-7C1B-40AE-87EF-FC5634310F6D}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Bank.Communication.Application.Contract", "Application\Bank.Communication.Application.Contract\Bank.Communication.Application.Contract.xproj", "{BA0F2EAC-B988-461E-A0FE-F61F49FDBA8D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{221C9387-6828-4DA1-9710-B384F40C46C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{221C9387-6828-4DA1-9710-B384F40C46C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{221C9387-6828-4DA1-9710-B384F40C46C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{221C9387-6828-4DA1-9710-B384F40C46C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3A6F9A7-A107-4107-A2D9-9EE3F0D2CF0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3A6F9A7-A107-4107-A2D9-9EE3F0D2CF0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3A6F9A7-A107-4107-A2D9-9EE3F0D2CF0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3A6F9A7-A107-4107-A2D9-9EE3F0D2CF0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39B84F5A-1A43-4812-A294-D1400D627253}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39B84F5A-1A43-4812-A294-D1400D627253}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39B84F5A-1A43-4812-A294-D1400D627253}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39B84F5A-1A43-4812-A294-D1400D627253}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A8BE4B3-6888-4693-86C8-55B86B97F10C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A8BE4B3-6888-4693-86C8-55B86B97F10C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A8BE4B3-6888-4693-86C8-55B86B97F10C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A8BE4B3-6888-4693-86C8-55B86B97F10C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D88C7F94-3890-470F-9A18-6DB3C2C80AA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D88C7F94-3890-470F-9A18-6DB3C2C80AA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D88C7F94-3890-470F-9A18-6DB3C2C80AA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D88C7F94-3890-470F-9A18-6DB3C2C80AA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60D4B164-7C1B-40AE-87EF-FC5634310F6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60D4B164-7C1B-40AE-87EF-FC5634310F6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60D4B164-7C1B-40AE-87EF-FC5634310F6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60D4B164-7C1B-40AE-87EF-FC5634310F6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA0F2EAC-B988-461E-A0FE-F61F49FDBA8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA0F2EAC-B988-461E-A0FE-F61F49FDBA8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA0F2EAC-B988-461E-A0FE-F61F49FDBA8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA0F2EAC-B988-461E-A0FE-F61F49FDBA8D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{221C9387-6828-4DA1-9710-B384F40C46C9} = {FEF3D540-6E10-4A6B-8C55-A341F8FCF6A0}
+		{F8BC95AA-36BB-47AB-A5CE-8FD372665916} = {FEF3D540-6E10-4A6B-8C55-A341F8FCF6A0}
+		{2158BD14-B47D-48D6-B73B-CB1A0136ADF9} = {FEF3D540-6E10-4A6B-8C55-A341F8FCF6A0}
+		{E69B92B1-9D82-48AB-8E5B-1F06A0F285E3} = {FEF3D540-6E10-4A6B-8C55-A341F8FCF6A0}
+		{B3A6F9A7-A107-4107-A2D9-9EE3F0D2CF0C} = {E69B92B1-9D82-48AB-8E5B-1F06A0F285E3}
+		{39B84F5A-1A43-4812-A294-D1400D627253} = {E69B92B1-9D82-48AB-8E5B-1F06A0F285E3}
+		{2A8BE4B3-6888-4693-86C8-55B86B97F10C} = {2158BD14-B47D-48D6-B73B-CB1A0136ADF9}
+		{D88C7F94-3890-470F-9A18-6DB3C2C80AA1} = {2158BD14-B47D-48D6-B73B-CB1A0136ADF9}
+		{60D4B164-7C1B-40AE-87EF-FC5634310F6D} = {F8BC95AA-36BB-47AB-A5CE-8FD372665916}
+		{BA0F2EAC-B988-461E-A0FE-F61F49FDBA8D} = {F8BC95AA-36BB-47AB-A5CE-8FD372665916}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 8
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://yannickmonje.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = src\\Bank.Server.Communication\\Bank.Server.Communication.xproj
+		SccProjectTopLevelParentUniqueName1 = Bank.Server.Communication.sln
+		SccProjectName1 = src/Bank.Server.Communication
+		SccLocalPath1 = src\\Bank.Server.Communication
+		SccProjectUniqueName2 = Infrastructure\\Bank.Communication.Infrastructure\\Bank.Communication.Infrastructure.xproj
+		SccProjectTopLevelParentUniqueName2 = Bank.Server.Communication.sln
+		SccProjectName2 = Infrastructure/Bank.Communication.Infrastructure
+		SccLocalPath2 = Infrastructure\\Bank.Communication.Infrastructure
+		SccProjectUniqueName3 = Infrastructure\\Bank.Communication.Infrastructure.Contract\\Bank.Communication.Infrastructure.Contract.xproj
+		SccProjectTopLevelParentUniqueName3 = Bank.Server.Communication.sln
+		SccProjectName3 = Infrastructure/Bank.Communication.Infrastructure.Contract
+		SccLocalPath3 = Infrastructure\\Bank.Communication.Infrastructure.Contract
+		SccProjectUniqueName4 = Domain\\Bank.Communication.Domain\\Bank.Communication.Domain.xproj
+		SccProjectTopLevelParentUniqueName4 = Bank.Server.Communication.sln
+		SccProjectName4 = Domain/Bank.Communication.Domain
+		SccLocalPath4 = Domain\\Bank.Communication.Domain
+		SccProjectUniqueName5 = Domain\\Bank.Communication.Domain.Contract\\Bank.Communication.Domain.Contract.xproj
+		SccProjectTopLevelParentUniqueName5 = Bank.Server.Communication.sln
+		SccProjectName5 = Domain/Bank.Communication.Domain.Contract
+		SccLocalPath5 = Domain\\Bank.Communication.Domain.Contract
+		SccProjectUniqueName6 = Application\\Bank.Communication.Application\\Bank.Communication.Application.xproj
+		SccProjectTopLevelParentUniqueName6 = Bank.Server.Communication.sln
+		SccProjectName6 = Application/Bank.Communication.Application
+		SccLocalPath6 = Application\\Bank.Communication.Application
+		SccProjectUniqueName7 = Application\\Bank.Communication.Application.Contract\\Bank.Communication.Application.Contract.xproj
+		SccProjectTopLevelParentUniqueName7 = Bank.Server.Communication.sln
+		SccProjectName7 = Application/Bank.Communication.Application.Contract
+		SccLocalPath7 = Application\\Bank.Communication.Application.Contract
+	EndGlobalSection
+EndGlobal
