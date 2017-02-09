@@ -13,7 +13,7 @@ namespace Bank.Communication.Application.DependencyInjection
 	{
 		Dictionary<Type, Type> _types; // first iebicsactivity, second worker
 
-		public Resolver()
+		public Resolver(Contract.Handler.IEbicsHandler handler)
 		{
 			AppDomain domain = new AppDomain(typeof(IEbicsWorker), "Bank.Communication.Application.Worker");
 			_types = new Dictionary<Type, Type>();

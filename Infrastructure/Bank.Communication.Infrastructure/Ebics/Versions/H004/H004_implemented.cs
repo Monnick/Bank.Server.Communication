@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Bank.Communication.Infrastructure.Contract.Ebics.Basic;
 using Bank.Communication.Infrastructure.Core;
+using Bank.Communication.Infrastructure.Contract.Ebics.Composed;
 
 namespace Bank.Communication.Infrastructure.Ebics.Versions.H004
 {

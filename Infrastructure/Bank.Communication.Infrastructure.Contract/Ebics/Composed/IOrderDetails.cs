@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Bank.Communication.Infrastructure.Contract.Ebics
+namespace Bank.Communication.Infrastructure.Contract.Ebics.Composed
 {
 	public interface IOrderDetails
 	{

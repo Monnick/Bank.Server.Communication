@@ -12,7 +12,7 @@ namespace Bank.Communication.Application.Handler
 	public class EbicsHandler : IEbicsHandler
 	{
 		private static Lazy<ISchemaSelector> _selector = new Lazy<ISchemaSelector>(() => new Domain.Ebics.SchemaSelector());
-		private static Lazy<Resolver> _resolver = new Lazy<Resolver>(() => new Resolver());
+		private static Lazy<Resolver> _resolver = new Lazy<Resolver>(() => new Resolver(null));
 
 		private static ISchemaSelector Selector
 		{
@@ -32,7 +32,6 @@ namespace Bank.Communication.Application.Handler
 
 		public EbicsHandler()
 		{
-			System.Diagnostics.Debug.WriteLine(Resolver.ToString());
 		}
 
 		public Stream ReadData(Stream transmittedData)

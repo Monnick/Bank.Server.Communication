@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Bank.Communication.Infrastructure.Contract.Core
 {
-    public class AppDomain
+	public class AppDomain
 	{
 		private Type _interfaceType;
 		private string _namespacePrefix;
@@ -40,7 +40,7 @@ namespace Bank.Communication.Infrastructure.Contract.Core
 			return assemblies.ToArray();
 		}
 
-		private static bool IsCandidateCompilationLibrary(RuntimeLibrary compilationLibrary)
+		private bool IsCandidateCompilationLibrary(RuntimeLibrary compilationLibrary)
 		{
 			return compilationLibrary.Name == ("Bank.Communication")
 				|| compilationLibrary.Dependencies.Any(d => d.Name.StartsWith("Bank.Communication"));

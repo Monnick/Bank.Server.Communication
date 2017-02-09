@@ -10,46 +10,34 @@ using System.IO;
 
 namespace Bank.Server.Communication.Controllers
 {
-    public class EBICSController : Controller
+	public class EBICSController : Controller
 	{
-		private static Lazy<IEbicsHandler> _handler = new Lazy<IEbicsHandler>(() => new Bank.Communication.Application.Handler.EbicsHandler());
-
-		protected static IEbicsHandler Handler
+		public EBICSController()
 		{
-			get
-			{
-				return _handler.Value;
-			}
 		}
 
-		public EBICSController()
-        {
-        }
+		[HttpGet]
+		public string Payment()
+		{
+			const string version = "Version: {0}";
 
-        [HttpGet]
-        public string Payment()
-        {
-            const string version = "Version: {0}";
+			StringBuilder builder = new StringBuilder();
 
-            StringBuilder builder = new StringBuilder();
+			builder.AppendLine(Microsoft.Extensions.PlatformAbstractions.PlatformServices.Default.Application.ApplicationName);
 
-            builder.AppendLine(Microsoft.Extensions.PlatformAbstractions.PlatformServices.Default.Application.ApplicationName);
+			builder.AppendFormat(version, Microsoft.Extensions.PlatformAbstractions.PlatformServices.Default.Application.ApplicationVersion);
+			
+			return builder.ToString();
+		}
 
-            builder.AppendFormat(version, Microsoft.Extensions.PlatformAbstractions.PlatformServices.Default.Application.ApplicationVersion);
-
-			builder.AppendLine("initialized: " + (Handler != null ? "true" : "false"));
-
-            return builder.ToString();
-        }
-
-        [HttpPost]
-        public void Ebics()
-        {
+		[HttpPost]
+		public void Ebics([FromServices] IEbicsHandler handler)
+		{
 			MemoryStream stream = new MemoryStream();
 			HttpContext.Request.Body.CopyTo(stream);
 			stream.Position = 0;
-
-			HttpContext.Response.Body = Handler.ReadData(stream);
-        }
-    }
+			
+			HttpContext.Response.Body = handler.ReadData(stream);
+		}
+	}
 }
