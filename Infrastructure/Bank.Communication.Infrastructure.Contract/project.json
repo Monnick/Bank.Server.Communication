@@ -1,4 +1,7 @@
 ﻿{
+  "title": "Bank.Communication.Infrastructure.Contract",
+  "copyright": "Monnick",
+  "language": "en",
   "version": "1.0.0-*",
 
   "dependencies": {

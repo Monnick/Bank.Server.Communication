@@ -27,7 +27,8 @@
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
     "Bank.Communication.Application.Contract": "1.0.0-*",
     "Bank.Communication.Application": "1.0.0-*",
-    "Microsoft.Extensions.DependencyInjection": "1.1.0"
+    "Microsoft.Extensions.DependencyInjection": "1.1.0",
+    "SimpleIOC": "1.0.0"
   },
 
   "tools": {

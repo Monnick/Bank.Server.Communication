@@ -8,6 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Bank.Communication.Application.Contract.Handler;
+using SimpleIOC.Configuration;
+using SimpleIOC.Contract;
 
 namespace Bank.Server.Communication
 {
@@ -24,7 +26,7 @@ namespace Bank.Server.Communication
 		}
 
 		public IConfigurationRoot Configuration { get; }
-
+		
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
@@ -32,7 +34,7 @@ namespace Bank.Server.Communication
 			services.AddMvc();
 
 			// Add application services.
-			services.AddTransient<IEbicsHandler, Bank.Communication.Application.Handler.EbicsHandler>();
+			RegisterConfiguration(services);
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,6 +51,25 @@ namespace Bank.Server.Communication
 					name: "default",
 					template: "{controller=EBICS}/{action=Payment}/{id?}");
 			});
+		}
+
+		private void RegisterConfiguration(IServiceCollection services)
+		{
+			var config = ReadConfiguration();
+
+			foreach (var registered in config)
+			{
+				services.AddTransient(registered.ResolveContract(), registered.ResolveImplementation());
+			}
+		}
+
+		private DIConfiguration ReadConfiguration()
+		{
+			var iocConfig = new DIConfiguration();
+
+			Configuration.GetSection("DIConfiguration").Bind(iocConfig);
+
+			return iocConfig;
 		}
 	}
 }

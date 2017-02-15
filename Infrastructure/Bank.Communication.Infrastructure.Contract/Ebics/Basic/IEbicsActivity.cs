@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 
 namespace Bank.Communication.Infrastructure.Contract.Ebics.Basic
 {
-    public interface IEbicsActivity
-    {
-    }
+	public interface IEbicsActivity
+	{
+		Type IdentifingType { get; }
+	}
 }

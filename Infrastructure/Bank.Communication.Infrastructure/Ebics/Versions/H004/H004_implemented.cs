@@ -18,6 +18,14 @@ namespace Bank.Communication.Infrastructure.Ebics.Versions.H004
 				return header;
 			}
 		}
+
+		public Type IdentifingType
+		{
+			get
+			{
+				return typeof(IEbicsRequest);
+			}
+		}
 	}
 
 	public partial class ebicsRequestHeader : IEbicsRequestHeader

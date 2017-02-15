@@ -1,4 +1,7 @@
 {
+  "title": "Bank.Communication.Domain",
+  "copyright": "Monnick",
+  "language": "en",
   "version": "1.0.0-*",
 
   "dependencies": {

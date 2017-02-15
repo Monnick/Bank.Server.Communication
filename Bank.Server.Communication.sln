@@ -80,38 +80,4 @@ Global
 		{60D4B164-7C1B-40AE-87EF-FC5634310F6D} = {F8BC95AA-36BB-47AB-A5CE-8FD372665916}
 		{BA0F2EAC-B988-461E-A0FE-F61F49FDBA8D} = {F8BC95AA-36BB-47AB-A5CE-8FD372665916}
 	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 8
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://yannickmonje.visualstudio.com/
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = src\\Bank.Server.Communication\\Bank.Server.Communication.xproj
-		SccProjectTopLevelParentUniqueName1 = Bank.Server.Communication.sln
-		SccProjectName1 = src/Bank.Server.Communication
-		SccLocalPath1 = src\\Bank.Server.Communication
-		SccProjectUniqueName2 = Infrastructure\\Bank.Communication.Infrastructure\\Bank.Communication.Infrastructure.xproj
-		SccProjectTopLevelParentUniqueName2 = Bank.Server.Communication.sln
-		SccProjectName2 = Infrastructure/Bank.Communication.Infrastructure
-		SccLocalPath2 = Infrastructure\\Bank.Communication.Infrastructure
-		SccProjectUniqueName3 = Infrastructure\\Bank.Communication.Infrastructure.Contract\\Bank.Communication.Infrastructure.Contract.xproj
-		SccProjectTopLevelParentUniqueName3 = Bank.Server.Communication.sln
-		SccProjectName3 = Infrastructure/Bank.Communication.Infrastructure.Contract
-		SccLocalPath3 = Infrastructure\\Bank.Communication.Infrastructure.Contract
-		SccProjectUniqueName4 = Domain\\Bank.Communication.Domain\\Bank.Communication.Domain.xproj
-		SccProjectTopLevelParentUniqueName4 = Bank.Server.Communication.sln
-		SccProjectName4 = Domain/Bank.Communication.Domain
-		SccLocalPath4 = Domain\\Bank.Communication.Domain
-		SccProjectUniqueName5 = Domain\\Bank.Communication.Domain.Contract\\Bank.Communication.Domain.Contract.xproj
-		SccProjectTopLevelParentUniqueName5 = Bank.Server.Communication.sln
-		SccProjectName5 = Domain/Bank.Communication.Domain.Contract
-		SccLocalPath5 = Domain\\Bank.Communication.Domain.Contract
-		SccProjectUniqueName6 = Application\\Bank.Communication.Application\\Bank.Communication.Application.xproj
-		SccProjectTopLevelParentUniqueName6 = Bank.Server.Communication.sln
-		SccProjectName6 = Application/Bank.Communication.Application
-		SccLocalPath6 = Application\\Bank.Communication.Application
-		SccProjectUniqueName7 = Application\\Bank.Communication.Application.Contract\\Bank.Communication.Application.Contract.xproj
-		SccProjectTopLevelParentUniqueName7 = Bank.Server.Communication.sln
-		SccProjectName7 = Application/Bank.Communication.Application.Contract
-		SccLocalPath7 = Application\\Bank.Communication.Application.Contract
-	EndGlobalSection
 EndGlobal

@@ -1,6 +1,6 @@
 ﻿using Bank.Communication.Application.Contract.Handler;
-using Bank.Communication.Application.DependencyInjection;
 using Bank.Communication.Domain.Contract.Ebics;
+using Bank.Communication.Infrastructure.Contract.Ebics.Basic;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,35 +11,23 @@ namespace Bank.Communication.Application.Handler
 {
 	public class EbicsHandler : IEbicsHandler
 	{
-		private static Lazy<ISchemaSelector> _selector = new Lazy<ISchemaSelector>(() => new Domain.Ebics.SchemaSelector());
-		private static Lazy<Resolver> _resolver = new Lazy<Resolver>(() => new Resolver(null));
+		protected ISchemaSelector SchemaSelector { get; }
 
-		private static ISchemaSelector Selector
-		{
-			get
-			{
-				return _selector.Value;
-			}
-		}
+		protected IServiceProvider ServiceProvider { get; }
 
-		private static Resolver Resolver
+		public EbicsHandler(ISchemaSelector schemaSelector, IServiceProvider serviceProvider)
 		{
-			get
-			{
-				return _resolver.Value;
-			}
-		}
+			SchemaSelector = schemaSelector;
 
-		public EbicsHandler()
-		{
+			ServiceProvider = serviceProvider;
 		}
 
 		public Stream ReadData(Stream transmittedData)
 		{
-			var activity = Selector.ReadData(transmittedData);
+			var activity = SchemaSelector.ReadData(transmittedData);
 
-			var worker = Resolver.Resolve(activity);
-
+			var worker = ServiceProvider.GetService(activity.IdentifingType) as Contract.Worker.IEbicsWorker;
+			
 			var result = worker.Process(activity);
 
 			return new MemoryStream();
