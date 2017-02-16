@@ -28,7 +28,9 @@ namespace Bank.Communication.Application.Handler
 
 			var worker = ServiceProvider.GetService(activity.IdentifingType) as Contract.Worker.IEbicsWorker;
 			
-			var result = worker.Process(activity);
+			worker.Process(activity);
+
+			var result = worker.FetchResult();
 
 			return new MemoryStream();
 		}

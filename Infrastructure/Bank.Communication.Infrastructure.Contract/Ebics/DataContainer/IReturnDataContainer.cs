@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 
 namespace Bank.Communication.Infrastructure.Contract.Ebics.DataContainer
 {
-	public interface IErrorCodeContainer
+	public interface IReturnDataContainer
 	{
-		int ErrorCode { get; }
+		string ReturnCode { get; }
+
+		string ReportText { get; }
 	}
 }

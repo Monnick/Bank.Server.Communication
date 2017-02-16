@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Bank.Communication.Infrastructure.Contract.Ebics.DataContainer
+namespace Bank.Communication.Infrastructure.Contract.Ebics
 {
-	public interface IEbicsCharContainer
+	public interface IEbicsResponse : IEbicsResult
 	{
-		EbicsChar EbicsChar { get; }
+		IEbicsResponseHeader Header { get; }
 	}
 }

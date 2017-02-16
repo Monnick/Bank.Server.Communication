@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Bank.Communication.Infrastructure.Ebics.Versions
 {
+	[Obsolete("Is this class needed?", true)]
 	public class EbicsResult : IEbicsResult
 	{
 		public EbicsChar EbicsChar

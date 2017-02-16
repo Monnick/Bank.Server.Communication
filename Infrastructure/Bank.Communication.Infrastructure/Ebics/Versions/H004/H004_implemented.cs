@@ -9,6 +9,60 @@ using Bank.Communication.Infrastructure.Contract.Ebics.Composed;
 
 namespace Bank.Communication.Infrastructure.Ebics.Versions.H004
 {
+	public partial class ebicsResponse : IEbicsResponse
+	{
+		public IEbicsResponseHeader Header
+		{
+			get
+			{
+				return header;
+			}
+		}
+	}
+
+	public partial class ebicsResponseHeader : IEbicsResponseHeader
+	{
+		public int NumSegments
+		{
+			get
+			{
+				return string.IsNullOrEmpty(mutable?.SegmentNumber?.Value) ? 0 : int.Parse(mutable.SegmentNumber.Value);
+			}
+		}
+
+		public string ReportText
+		{
+			get
+			{
+				return mutable?.ReportText;
+			}
+		}
+
+		public string ReturnCode
+		{
+			get
+			{
+				return mutable?.ReturnCode;
+			}
+		}
+
+		public byte[] TransactionID
+		{
+			get
+			{
+				return @static?.TransactionID;
+			}
+		}
+
+		public TransactionPhase TransactionPhase
+		{
+			get
+			{
+				return (TransactionPhase)mutable?.TransactionPhase;
+			}
+		}
+	}
+
 	public partial class ebicsRequest : IEbicsRequest
 	{
 		public IEbicsRequestHeader Header
@@ -26,6 +80,11 @@ namespace Bank.Communication.Infrastructure.Ebics.Versions.H004
 				return typeof(IEbicsRequest);
 			}
 		}
+
+		public IEbicsResult CreateResult()
+		{
+			throw new NotImplementedException();
+		}
 	}
 
 	public partial class ebicsRequestHeader : IEbicsRequestHeader
@@ -42,7 +101,7 @@ namespace Bank.Communication.Infrastructure.Ebics.Versions.H004
 		{
 			get
 			{
-				return string.IsNullOrEmpty(mutable.SegmentNumber.Value) ? 0 : int.Parse(mutable.SegmentNumber.Value);
+				return string.IsNullOrEmpty(mutable?.SegmentNumber?.Value) ? 0 : int.Parse(mutable.SegmentNumber.Value);
 			}
 		}
 

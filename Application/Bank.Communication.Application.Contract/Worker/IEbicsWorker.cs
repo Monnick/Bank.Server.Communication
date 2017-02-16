@@ -8,7 +8,9 @@ namespace Bank.Communication.Application.Contract.Worker
 {
 	public interface IEbicsWorker
 	{
-		IEbicsResult Process(IEbicsActivity activity);
+		void Process(IEbicsActivity activity);
+
+		IEbicsResult FetchResult();
 	}
 
 	public interface IEbicsWorker<T> : IEbicsWorker where T : IEbicsActivity
