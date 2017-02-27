@@ -61,6 +61,10 @@ namespace Bank.Server.Communication
 			{
 				services.AddTransient(registered.ResolveContract(), registered.ResolveImplementation());
 			}
+
+			RegisterMinimalConfiguration(services, config);
+			
+			services.AddSingleton(f => ReadServiceConfiguration());
 		}
 
 		private DIConfiguration ReadConfiguration()
@@ -70,6 +74,27 @@ namespace Bank.Server.Communication
 			Configuration.GetSection("DIConfiguration").Bind(iocConfig);
 
 			return iocConfig;
+		}
+
+		/// <summary>
+		/// Registers the minimal configuration to run the service.
+		/// </summary>
+		/// <param name="services"></param>
+		/// <param name="config"></param>
+		private void RegisterMinimalConfiguration(IServiceCollection services, DIConfiguration config)
+		{ }
+
+		private Contract.IConfiguration ReadServiceConfiguration()
+		{
+			int maxNumberOfTransactions = Configuration.GetValue<int>("MaxNumberOfTransactions");
+			int maxRequestSize = Configuration.GetValue<int>("MaxRequestSize");
+			TimeSpan maxTimeDifference = Configuration.GetValue<TimeSpan>("MaxTimeDifference");
+
+			maxNumberOfTransactions = maxNumberOfTransactions == 0 ? int.MaxValue : maxNumberOfTransactions;
+			maxRequestSize = maxRequestSize == 0 ? int.MaxValue : maxRequestSize;
+			maxTimeDifference = maxTimeDifference == null ? TimeSpan.MaxValue : maxTimeDifference;
+
+			return new Configuration(maxNumberOfTransactions, maxRequestSize, maxTimeDifference);
 		}
 	}
 }

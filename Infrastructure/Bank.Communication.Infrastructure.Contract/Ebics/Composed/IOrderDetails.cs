@@ -10,5 +10,11 @@ namespace Bank.Communication.Infrastructure.Contract.Ebics.Composed
 		string OrderType { get; }
 
 		string OrderAttribute { get; }
+
+		string OrderID { get; }
+
+		bool IsOrderData();
+
+		bool IsTechnicalData();
 	}
 }

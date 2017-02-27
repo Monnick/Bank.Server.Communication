@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Bank.Storage.InMemoryDemo.ValueObjects
 {
-	sealed class Transaction
+	public sealed class Transaction
 	{
 		public string Host { get; }
 
@@ -18,6 +18,8 @@ namespace Bank.Storage.InMemoryDemo.ValueObjects
 		public int NumberOfSegments { get; }
 
 		IList<KeyValuePair<int, object>> Transactions { get; }
+
+		public int NumberOfStoredTransactions { get { return Transactions.Count; } }
 
 		public Transaction(string host, string partner, string user, int numberOfSegments, byte[] transactionID)
 		{
@@ -33,6 +35,11 @@ namespace Bank.Storage.InMemoryDemo.ValueObjects
 		public void AppendTransaction(int number, object data)
 		{
 			Transactions.Add(new KeyValuePair<int, object>(number, data));
+		}
+
+		public object GetTransaction(int number)
+		{
+			return Transactions[number];
 		}
 	}
 }

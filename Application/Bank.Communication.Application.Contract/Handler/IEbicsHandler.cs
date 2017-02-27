@@ -8,6 +8,10 @@ namespace Bank.Communication.Application.Contract.Handler
 {
 	public interface IEbicsHandler
 	{
+		void SetMaxNumberOfTranscations(int number);
+
+		void SetMaxRequestSize(int size);
+
 		Stream ReadData(Stream transmittedData);
 	}
 }

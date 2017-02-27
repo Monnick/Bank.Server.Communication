@@ -1,4 +1,4 @@
-﻿using Bank.Communication.Infrastructure.Contract.Ebics.DataContainer;
+﻿using Bank.Communication.Infrastructure.Contract.DataContainer;
 using System;
 using System.Collections.Generic;
 using System.Linq;

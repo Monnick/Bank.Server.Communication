@@ -3,23 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Bank.Communication.Infrastructure.Contract.Ebics.Basic;
+using Bank.Communication.Infrastructure.Contract;
 using Bank.Communication.Infrastructure.Core;
 using Bank.Communication.Infrastructure.Contract.Ebics.Composed;
 
 namespace Bank.Communication.Infrastructure.Ebics.Versions.H004
 {
-	public partial class ebicsResponse : IEbicsResponse
-	{
-		public IEbicsResponseHeader Header
-		{
-			get
-			{
-				return header;
-			}
-		}
-	}
-
 	public partial class ebicsResponseHeader : IEbicsResponseHeader
 	{
 		public int NumSegments
@@ -60,30 +49,6 @@ namespace Bank.Communication.Infrastructure.Ebics.Versions.H004
 			{
 				return (TransactionPhase)mutable?.TransactionPhase;
 			}
-		}
-	}
-
-	public partial class ebicsRequest : IEbicsRequest
-	{
-		public IEbicsRequestHeader Header
-		{
-			get
-			{
-				return header;
-			}
-		}
-
-		public Type IdentifingType
-		{
-			get
-			{
-				return typeof(IEbicsRequest);
-			}
-		}
-
-		public IEbicsResult CreateResult()
-		{
-			throw new NotImplementedException();
 		}
 	}
 
@@ -136,6 +101,31 @@ namespace Bank.Communication.Infrastructure.Ebics.Versions.H004
 				return XmlPolymorphicArrayHelper.GetItem(@static.Items, @static.ItemsElementName, ItemsChoiceType3.OrderDetails) as IOrderDetails;
 			}
 		}
+
+		public byte[] Nonce
+		{
+			get
+			{
+				return XmlPolymorphicArrayHelper.GetItem(@static.Items, @static.ItemsElementName, ItemsChoiceType3.Nonce) as byte[];
+			}
+		}
+
+		public DateTime Timestamp
+		{
+			get
+			{
+				var data = XmlPolymorphicArrayHelper.GetItem(@static.Items, @static.ItemsElementName, ItemsChoiceType3.Timestamp);
+				return data == null ? DateTime.MinValue : (DateTime)data;
+			}
+		}
+
+		public byte[] TransactionID
+		{
+			get
+			{
+				return XmlPolymorphicArrayHelper.GetItem(@static.Items, @static.ItemsElementName, ItemsChoiceType3.TransactionID) as byte[];
+			}
+		}
 	}
 
 	public partial class StaticHeaderOrderDetailsType : IOrderDetails
@@ -154,6 +144,17 @@ namespace Bank.Communication.Infrastructure.Ebics.Versions.H004
 			{
 				return OrderType?.Value;
 			}
+		}
+
+		public bool IsOrderData()
+		{
+			return !IsTechnicalData();
+		}
+
+		public bool IsTechnicalData()
+		{
+			string orderAttributes = OrderAttribute.ToString();
+			return orderAttributes.StartsWith("U", StringComparison.OrdinalIgnoreCase);
 		}
 	}
 }

@@ -6,27 +6,31 @@ using System.Threading.Tasks;
 using Bank.Communication.Infrastructure.Contract.Ebics;
 using Bank.Communication.Infrastructure.Contract.Ebics.Basic;
 using Bank.Communication.Domain.Contract.Storage;
+using Bank.Communication.Domain.Contract.Ebics;
 
 namespace Bank.Communication.Application.Worker
 {
 	class EbicsRequestWorker : IEbicsRequestWorker
 	{
-		protected IEbicsActivity Activity { get; private set; }
+		protected IEbicsRequest Activity { get; private set; }
 
-		protected ITransactionStorage _storage { get; }
+		protected IRequestValidator Validator { get; }
 
-		public EbicsRequestWorker(ITransactionStorage storage)
+		public EbicsRequestWorker(IRequestValidator validator, IStorageProvider provider)
 		{
-			_storage = storage;
+			Validator = validator;
+			Validator.SetStorage(provider);
 		}
 
 		public void Process(IEbicsActivity activity)
 		{
-			Activity = activity;
+			Activity = activity as IEbicsRequest;
 		}
 
 		public IEbicsResult FetchResult()
 		{
+			var validationResult = Validator.Validate(Activity);
+
 			return Activity.CreateResult();
 		}
 	}

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bank.Communication.Infrastructure.Contract.Ebics.Composed
 {
-    public interface IUserIdentificator : IHostContainer, IPartnerContainer, IUserContainer
-    {
-    }
+	public interface IInitialHeader : IPartnerContainer, IUserContainer, IOrderDetailsContainer, INonceContainer, INumberSegmentContainer
+	{
+	}
 }

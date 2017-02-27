@@ -7,6 +7,7 @@ using System.Text;
 using Bank.Communication.Domain.Contract.Ebics;
 using Bank.Communication.Application.Contract.Handler;
 using System.IO;
+using Bank.Server.Communication.Contract;
 
 namespace Bank.Server.Communication.Controllers
 {
@@ -20,7 +21,7 @@ namespace Bank.Server.Communication.Controllers
 		public string Payment()
 		{
 			const string version = "Version: {0}";
-
+			
 			StringBuilder builder = new StringBuilder();
 
 			builder.AppendLine(Microsoft.Extensions.PlatformAbstractions.PlatformServices.Default.Application.ApplicationName);
@@ -31,8 +32,12 @@ namespace Bank.Server.Communication.Controllers
 		}
 
 		[HttpPost]
-		public void Ebics([FromServices] IEbicsHandler handler)
+		public void Ebics([FromServices] IEbicsHandler handler, [FromServices] IConfiguration configuration)
 		{
+			// short solution for setting a service configuration
+			handler.SetMaxNumberOfTranscations(configuration.MaxNumberOfTransactions);
+			handler.SetMaxRequestSize(configuration.MaxRequestSize);
+
 			MemoryStream stream = new MemoryStream();
 			HttpContext.Request.Body.CopyTo(stream);
 			stream.Position = 0;
