@@ -82,7 +82,9 @@ namespace Bank.Server.Communication
 		/// <param name="services"></param>
 		/// <param name="config"></param>
 		private void RegisterMinimalConfiguration(IServiceCollection services, DIConfiguration config)
-		{ }
+		{
+			
+		}
 
 		private Contract.IConfiguration ReadServiceConfiguration()
 		{

@@ -28,7 +28,7 @@
     "Bank.Communication.Application.Contract": "1.0.0-*",
     "Bank.Communication.Application": "1.0.0-*",
     "Microsoft.Extensions.DependencyInjection": "1.1.0",
-    "SimpleIOC": "1.0.0",
+    "SimpleIOC": "1.0.2",
     "Bank.Communication.Domain": "1.0.0-*",
     "Bank.Communication.Domain.Contract": "1.0.0-*",
     "Bank.Communication.Infrastructure": "1.0.0-*",
