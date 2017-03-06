@@ -34,10 +34,6 @@ namespace Bank.Server.Communication.Controllers
 		[HttpPost]
 		public void Ebics([FromServices] IEbicsHandler handler, [FromServices] IConfiguration configuration)
 		{
-			// short solution for setting a service configuration
-			handler.SetMaxNumberOfTranscations(configuration.MaxNumberOfTransactions);
-			handler.SetMaxRequestSize(configuration.MaxRequestSize);
-
 			MemoryStream stream = new MemoryStream();
 			HttpContext.Request.Body.CopyTo(stream);
 			stream.Position = 0;

@@ -34,15 +34,5 @@ namespace Bank.Communication.Application.Handler
 
 			return new MemoryStream();
 		}
-
-		public void SetMaxNumberOfTranscations(int number)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void SetMaxRequestSize(int size)
-		{
-			throw new NotImplementedException();
-		}
 	}
 }
