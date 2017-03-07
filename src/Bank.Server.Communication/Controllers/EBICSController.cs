@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Text;
-using Bank.Communication.Domain.Contract.Ebics;
 using Bank.Communication.Application.Contract.Handler;
 using System.IO;
-using Bank.Server.Communication.Contract;
 
 namespace Bank.Server.Communication.Controllers
 {
@@ -32,7 +26,7 @@ namespace Bank.Server.Communication.Controllers
 		}
 
 		[HttpPost]
-		public void Ebics([FromServices] IEbicsHandler handler, [FromServices] IConfiguration configuration)
+		public void Ebics([FromServices] IEbicsHandler handler)
 		{
 			MemoryStream stream = new MemoryStream();
 			HttpContext.Request.Body.CopyTo(stream);

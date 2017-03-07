@@ -10,7 +10,7 @@ using Bank.Communication.Domain.Contract.Ebics;
 
 namespace Bank.Communication.Application.Worker
 {
-	class EbicsRequestWorker : IEbicsRequestWorker
+	public class EbicsRequestWorker : IEbicsRequestWorker
 	{
 		protected IEbicsRequest Activity { get; private set; }
 

@@ -81,7 +81,26 @@ namespace Bank.Server.Communication
 		/// <param name="config"></param>
 		private void RegisterMinimalConfiguration(IServiceCollection services, DIConfiguration config)
 		{
-			
+			Type contract = typeof(Bank.Communication.Infrastructure.Contract.Ebics.IEbicsRequest);
+
+			if (!config.IsRegistered(contract))
+				services.AddTransient(contract, typeof(Bank.Communication.Application.Worker.EbicsRequestWorker));
+
+			contract = typeof(Bank.Communication.Domain.Contract.Ebics.IRequestValidator);
+			if (!config.IsRegistered(contract))
+				services.AddTransient(contract, typeof(Bank.Communication.Domain.Ebics.RequestValidator));
+
+			contract = typeof(Bank.Communication.Domain.Contract.Ebics.ISchemaSelector);
+			if (!config.IsRegistered(contract))
+				services.AddTransient(contract, typeof(Bank.Communication.Domain.Ebics.SchemaSelector));
+
+			contract = typeof(Bank.Communication.Application.Contract.Handler.IEbicsHandler);
+			if (!config.IsRegistered(contract))
+				services.AddTransient(contract, typeof(Bank.Communication.Application.Handler.EbicsHandler));
+
+			contract = typeof(Bank.Communication.Domain.Contract.Storage.IStorageProvider);
+			if (!config.IsRegistered(contract))
+				services.AddTransient(contract, typeof(Bank.Communication.Domain.Storage.StorageProvider));
 		}
 	}
 }
