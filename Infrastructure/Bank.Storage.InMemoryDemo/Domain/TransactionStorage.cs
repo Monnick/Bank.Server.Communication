@@ -20,38 +20,38 @@ namespace Bank.Storage.InMemoryDemo.Domain
 			get { return _store.Value; }
 		}
 
-		public ActionResult AddTransactionSegment(byte[] transactionID, IBank bankUser, int number, object data)
+		public TechnicalReturnCode AddTransactionSegment(byte[] transactionID, IBank bankUser, int number, object data)
 		{
 			var entity = Store.Get(transactionID);
 
 			if (entity == null)
-				return new ActionResult(TechnicalReturnCode.EBICS_TX_UNKOWN_TXID);
+				return TechnicalReturnCode.EBICS_TX_UNKOWN_TXID;
 
 			if (entity.NumberOfSegments > entity.NumberOfStoredTransactions)
-				return new ActionResult(TechnicalReturnCode.EBICS_TX_SEGMENT_NUMBER_EXCEEDED);
+				return TechnicalReturnCode.EBICS_TX_SEGMENT_NUMBER_EXCEEDED;
 
 			if (entity.NumberOfSegments < entity.NumberOfStoredTransactions)
-				return new ActionResult(TechnicalReturnCode.EBICS_TX_SEGMENT_NUMBER_UNDERRUN);
+				return TechnicalReturnCode.EBICS_TX_SEGMENT_NUMBER_UNDERRUN;
 
 			entity.AppendTransaction(number, data);
 
-			return new ActionResult(TechnicalReturnCode.EBICS_OK);
+			return TechnicalReturnCode.EBICS_OK;
 		}
 
-		public ActionResult CloseTransaction(byte[] transactionID)
+		public TechnicalReturnCode CloseTransaction(byte[] transactionID)
 		{
 			var entity = Store.Get(transactionID);
 
 			if (entity == null)
-				return new ActionResult(TechnicalReturnCode.EBICS_TX_UNKOWN_TXID);
+				return TechnicalReturnCode.EBICS_TX_UNKOWN_TXID;
 
 			if (entity.NumberOfSegments > entity.NumberOfStoredTransactions)
-				return new ActionResult(TechnicalReturnCode.EBICS_TX_SEGMENT_NUMBER_EXCEEDED);
+				return TechnicalReturnCode.EBICS_TX_SEGMENT_NUMBER_EXCEEDED;
 
 			if (entity.NumberOfSegments < entity.NumberOfStoredTransactions)
-				return new ActionResult(TechnicalReturnCode.EBICS_TX_SEGMENT_NUMBER_UNDERRUN);
+				return TechnicalReturnCode.EBICS_TX_SEGMENT_NUMBER_UNDERRUN;
 
-			return new ActionResult(TechnicalReturnCode.EBICS_OK);
+			return TechnicalReturnCode.EBICS_OK;
 		}
 
 		public object LoadTransactionSegment(byte[] transactionID, IBank bankUser, int number)
@@ -70,18 +70,18 @@ namespace Bank.Storage.InMemoryDemo.Domain
 			return entity.GetTransaction(number);
 		}
 
-		public ActionResult PrepareTransaction(byte[] transactionID, IBank bankUser, int numberOfSegments)
+		public TechnicalReturnCode PrepareTransaction(byte[] transactionID, IBank bankUser, int numberOfSegments)
 		{
 			var entity = Store.Get(transactionID);
 
 			if (entity != null)
-				return new ActionResult(TechnicalReturnCode.EBICS_TX_MESSAGE_REPLAY);
+				return TechnicalReturnCode.EBICS_TX_MESSAGE_REPLAY;
 
 			entity = new Transaction(bankUser.HostID, bankUser.Partner.PartnerID, bankUser.Partner.User.UserID, numberOfSegments, transactionID);
 
 			Store.Add(transactionID, entity);
 
-			return new ActionResult(TechnicalReturnCode.EBICS_OK);
+			return TechnicalReturnCode.EBICS_OK;
 		}
 	}
 }

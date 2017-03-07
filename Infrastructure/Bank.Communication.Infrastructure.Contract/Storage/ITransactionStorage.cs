@@ -15,7 +15,7 @@ namespace Bank.Communication.Infrastructure.Contract.Storage
 		/// </summary>
 		/// <param name="transactionID"></param>
 		/// <param name="numberOfSegments"></param>
-		ActionResult PrepareTransaction(byte[] transactionID, IBank bankUser, int numberOfSegments);
+		TechnicalReturnCode PrepareTransaction(byte[] transactionID, IBank bankUser, int numberOfSegments);
 
 		/// <summary>
 		/// Adds a single transaction to an existing transaction
@@ -23,13 +23,13 @@ namespace Bank.Communication.Infrastructure.Contract.Storage
 		/// <param name="transactionID"></param>
 		/// <param name="number"></param>
 		/// <param name="data"></param>
-		ActionResult AddTransactionSegment(byte[] transactionID, IBank bankUser, int number, object data);
+		TechnicalReturnCode AddTransactionSegment(byte[] transactionID, IBank bankUser, int number, object data);
 
 		/// <summary>
 		/// Closes the transaction, no futher data will be commited
 		/// </summary>
 		/// <param name="transactionID"></param>
-		ActionResult CloseTransaction(byte[] transactionID);
+		TechnicalReturnCode CloseTransaction(byte[] transactionID);
 
 		/// <summary>
 		/// Loads a transaction segment (i.e. for transmitting it back to the customer)

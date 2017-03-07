@@ -19,14 +19,14 @@ namespace Bank.Storage.InMemoryDemo.Domain
 			get { return _store.Value; }
 		}
 
-		public ActionResult AddNonce(byte[] nonce, TimeSpan timeToLive)
+		public TechnicalReturnCode AddNonce(byte[] nonce, TimeSpan timeToLive)
 		{
 			var newNonce = new Nonce(nonce, timeToLive);
 			var entity = Store.Get(newNonce.ToString());
 
 			if (entity != null && entity.EndOfLife > DateTime.UtcNow)
 			{
-				return new ActionResult(TechnicalReturnCode.EBICS_TX_MESSAGE_REPLAY);
+				return TechnicalReturnCode.EBICS_TX_MESSAGE_REPLAY;
 			}
 			else if (entity != null)
 			{
@@ -34,7 +34,7 @@ namespace Bank.Storage.InMemoryDemo.Domain
 			}
 
 			Store.Add(newNonce.ToString(), newNonce);
-			return new ActionResult(TechnicalReturnCode.EBICS_OK);
+			return TechnicalReturnCode.EBICS_OK;
 		}
 	}
 }

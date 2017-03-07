@@ -13,10 +13,10 @@ namespace Bank.Communication.Infrastructure.Contract.Storage
 {
 	public interface IAdministrationStorage
 	{
-		ActionResult ValidateOrderDetails(IBank bank, IOrderDetails orderDetails);
+		TechnicalReturnCode ValidateOrderDetails(IBank bank, IOrderDetails orderDetails);
 
-		ActionResult ValidateBankConfiguration(IBank bank);
+		TechnicalReturnCode ValidateBankConfiguration(IBank bank);
 
-		ActionResult ValidateLocalConfiguration(IEbicsRequestHeader header);
+		TechnicalReturnCode ValidateLocalConfiguration(IEbicsRequestHeader header);
 	}
 }

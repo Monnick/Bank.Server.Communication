@@ -12,7 +12,7 @@ using Bank.Communication.Infrastructure.Contract;
 
 namespace Bank.Storage.InMemoryDemo.Domain
 {
-	public class AdministrationStorage : IAdministrationStorage
+	public class AdministrationStorage : Communication.Infrastructure.Contract.Storage.Basic.AdministrationStorage
 	{
 		private Lazy<Store<string, IBank>> _store = new Lazy<Store<string, IBank>>(() => new Store<string, IBank>());
 
@@ -21,30 +21,39 @@ namespace Bank.Storage.InMemoryDemo.Domain
 			get { return _store.Value; }
 		}
 
-		public ActionResult ValidateBankConfiguration(IBank bank)
+		public override TechnicalReturnCode ValidateLocalConfiguration(IEbicsRequestHeader header)
 		{
-			var entity = Store.Get(bank.HostID);
-
-			if (entity == null)
-				return new ActionResult(TechnicalReturnCode.EBICS_INVALID_HOST_ID);
-
-			if (entity?.Partner?.PartnerID != bank?.Partner?.PartnerID)
-				return new ActionResult(TechnicalReturnCode.EBICS_PARTNER_ID_MISMATCH);
-
-			if (entity?.Partner?.User?.UserID != entity?.Partner?.User?.UserID)
-				return new ActionResult(TechnicalReturnCode.EBICS_USER_UNKOWN);
-
-			return new ActionResult(TechnicalReturnCode.EBICS_OK);
+			throw new NotImplementedException();
 		}
 
-		public ActionResult ValidateLocalConfiguration(IEbicsRequestHeader header)
+		protected override bool ExistsBank(IBank bank)
 		{
-			return new ActionResult(TechnicalReturnCode.EBICS_OK);
+			throw new NotImplementedException();
 		}
 
-		public ActionResult ValidateOrderDetails(IBank bank, IOrderDetails orderDetails)
+		protected override bool ExistsOrderType(IOrderDetails orderDetails)
 		{
-			return new ActionResult(TechnicalReturnCode.EBICS_OK);
+			throw new NotImplementedException();
+		}
+
+		protected override bool ExistsPartner(IBank bank)
+		{
+			throw new NotImplementedException();
+		}
+
+		protected override bool ExistsUser(IBank bank)
+		{
+			throw new NotImplementedException();
+		}
+
+		protected override bool IsOrderValid(IBank bank, IOrderDetails orderDetails)
+		{
+			throw new NotImplementedException();
+		}
+
+		protected override bool IsUserValid(IBank bank)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

@@ -13,32 +13,32 @@ namespace Bank.Communication.Infrastructure.Contract.Storage.Basic
 {
 	public abstract class AdministrationStorage : IAdministrationStorage
 	{
-		public ActionResult ValidateBankConfiguration(IBank bank)
+		public TechnicalReturnCode ValidateBankConfiguration(IBank bank)
 		{
 			if (!ExistsBank(bank))
-				return new ActionResult(TechnicalReturnCode.EBICS_INVALID_HOST_ID);
+				return TechnicalReturnCode.EBICS_INVALID_HOST_ID;
 
 			if (!ExistsPartner(bank))
-				return new ActionResult(TechnicalReturnCode.EBICS_PARTNER_ID_MISMATCH);
+				return TechnicalReturnCode.EBICS_PARTNER_ID_MISMATCH;
 
 			if (!ExistsUser(bank))
-				return new ActionResult(TechnicalReturnCode.EBICS_USER_UNKOWN);
+				return TechnicalReturnCode.EBICS_USER_UNKOWN;
 
 			if (!IsUserValid(bank))
-				return new ActionResult(TechnicalReturnCode.EBICS_INVALID_USER_OR_STATE);
+				return TechnicalReturnCode.EBICS_INVALID_USER_OR_STATE;
 
-			return new ActionResult(TechnicalReturnCode.EBICS_OK);
+			return TechnicalReturnCode.EBICS_OK;
 		}
 
-		public ActionResult ValidateOrderDetails(IBank bank, IOrderDetails orderDetails)
+		public TechnicalReturnCode ValidateOrderDetails(IBank bank, IOrderDetails orderDetails)
 		{
 			if (!ExistsOrderType(orderDetails))
-				return new ActionResult(TechnicalReturnCode.EBICS_UNSUPPORTED_ORDER_TYPE);
+				return TechnicalReturnCode.EBICS_UNSUPPORTED_ORDER_TYPE;
 
 			if (!IsOrderValid(bank, orderDetails))
-				return new ActionResult(TechnicalReturnCode.EBICS_INVALID_ORDER_TYPE);
+				return TechnicalReturnCode.EBICS_INVALID_ORDER_TYPE;
 
-			return new ActionResult(TechnicalReturnCode.EBICS_OK);
+			return TechnicalReturnCode.EBICS_OK;
 		}
 
 		protected abstract bool ExistsUser(IBank bank);
@@ -53,6 +53,6 @@ namespace Bank.Communication.Infrastructure.Contract.Storage.Basic
 
 		protected abstract bool ExistsPartner(IBank bank);
 
-		public abstract ActionResult ValidateLocalConfiguration(IEbicsRequestHeader header);
+		public abstract TechnicalReturnCode ValidateLocalConfiguration(IEbicsRequestHeader header);
 	}
 }

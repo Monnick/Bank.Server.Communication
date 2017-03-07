@@ -9,6 +9,6 @@ namespace Bank.Communication.Infrastructure.Contract.Storage
 {
 	public interface INonceStorage
 	{
-		ActionResult AddNonce(byte[] nonce, TimeSpan timeToLive);
+		TechnicalReturnCode AddNonce(byte[] nonce, TimeSpan timeToLive);
 	}
 }
