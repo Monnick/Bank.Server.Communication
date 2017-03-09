@@ -1,13 +1,9 @@
 ﻿using Bank.Communication.Domain.Contract.Ebics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Bank.Communication.Domain.Contract.Storage;
+using Bank.Communication.Infrastructure.Contract;
 using Bank.Communication.Infrastructure.Contract.Ebics;
 using Bank.Communication.Infrastructure.Contract.Ebics.Basic;
-using Bank.Communication.Infrastructure.Contract;
-using Bank.Communication.Infrastructure.Ebics.Basic;
+using System;
 
 namespace Bank.Communication.Domain.Ebics
 {
@@ -31,7 +27,7 @@ namespace Bank.Communication.Domain.Ebics
 				Infrastructure.Contract.DataContainer.ITransactionIDContainer transactionID = request.Header;
 
 				result = result.Success ? Provider.ValidateTransaction(transactionID) : result;
-				
+
 				return new ActionResult(TechnicalReturnCode.EBICS_OK);
 			}
 			else if (request.Header.TransactionID == null && request.Header.Nonce != null) // new transaction
@@ -42,9 +38,9 @@ namespace Bank.Communication.Domain.Ebics
 					result = new ActionResult(TechnicalReturnCode.EBICS_INCOMPATIBLE_ORDER_ATTRIBUTE);
 
 				result = result.Success ? Provider.ValidateInitialHeader(header) : result;
-				
+
 				result = result.Success ? Provider.AddNonce(header, new TimeSpan(6, 0, 0)) : result;
-				
+
 				return new ActionResult(TechnicalReturnCode.EBICS_OK);
 			}
 

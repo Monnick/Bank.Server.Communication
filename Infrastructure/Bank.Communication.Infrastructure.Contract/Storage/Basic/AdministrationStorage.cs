@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Bank.Communication.Infrastructure.Contract.Administration;
-using Bank.Communication.Infrastructure.Contract.DataContainer;
-using Bank.Communication.Infrastructure.Contract.Ebics.Basic;
+﻿using Bank.Communication.Infrastructure.Contract.Administration;
 using Bank.Communication.Infrastructure.Contract.Ebics;
-using Bank.Communication.Infrastructure.Ebics.Basic;
 using Bank.Communication.Infrastructure.Contract.Ebics.Composed;
 
 namespace Bank.Communication.Infrastructure.Contract.Storage.Basic

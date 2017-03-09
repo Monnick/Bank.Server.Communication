@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.IO;
 
 namespace Bank.Communication.Infrastructure.Contract.Ebics.Basic
 {
-    public interface IObjectGenerator
+	public interface IObjectGenerator
     {
 		IEbicsActivity ConvertData(Stream data);
     }

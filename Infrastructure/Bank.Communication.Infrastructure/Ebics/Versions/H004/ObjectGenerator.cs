@@ -1,11 +1,7 @@
-﻿using Bank.Communication.Infrastructure.Contract.Core;
-using Bank.Communication.Infrastructure.Contract.Ebics.Basic;
+﻿using Bank.Communication.Infrastructure.Contract.Ebics.Basic;
 using Bank.Communication.Infrastructure.Core;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace Bank.Communication.Infrastructure.Ebics.Versions.H004

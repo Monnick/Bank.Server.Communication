@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Bank.Storage.InMemoryDemo.ValueObjects
 {
-    public class Nonce
+	public class Nonce
     {
 		public byte[] Value { get; }
 

@@ -1,12 +1,10 @@
 ﻿using Bank.Communication.Domain.Contract.Ebics;
+using Bank.Communication.Infrastructure.Contract.Ebics.Basic;
+using Bank.Communication.Infrastructure.Core;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Bank.Communication.Infrastructure.Contract.Ebics.Basic;
-using System.Xml.Serialization;
 using System.IO;
-using Bank.Communication.Infrastructure.Core;
+using System.Text;
 
 namespace Bank.Communication.Domain.Ebics
 {

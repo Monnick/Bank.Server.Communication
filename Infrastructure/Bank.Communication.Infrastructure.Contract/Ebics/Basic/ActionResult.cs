@@ -1,11 +1,4 @@
-﻿using Bank.Communication.Infrastructure.Contract;
-using Bank.Communication.Infrastructure.Contract.Ebics.Basic;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Bank.Communication.Infrastructure.Ebics.Basic
+﻿namespace Bank.Communication.Infrastructure.Contract.Ebics.Basic
 {
 	public sealed class ActionResult
 	{

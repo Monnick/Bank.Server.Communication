@@ -1,8 +1,5 @@
 ﻿using Bank.Communication.Infrastructure.Contract.Ebics;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Bank.Communication.Infrastructure.Contract;
 using Bank.Communication.Infrastructure.Core;
 using Bank.Communication.Infrastructure.Contract.Ebics.Composed;
