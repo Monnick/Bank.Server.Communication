@@ -23,4 +23,32 @@ This projects uses some selected words to identify certain steps, methods and ob
 * 'Nonce': A cryptographic value which is forbidden to be repeated within a certain timespan.
 * 'EbicsActivity': A http request from the client to this server to start an activity. This http request has to be a valid ebics message and the concrete type will be determinte at a later processing step. An EbicsRequest is an EbicsActivity but the header data of this request is not.
 * 'InitialHeader': The selected properties from an ebics request, which will only be filled during the ebics request during a complete communication.
-* 'UserIdentificator': The combination of properties to identify an user (host, partner and user name).
+* 'UserIdentificator': The combination of properties to identify an user (host, partner and user name).   
+
+# Bank.Server.Communication
+## Startup
+During startup the server reads the appsettings and try to resolve the types to classes and interfaces. The configuration is read by an external package called "SimpleIOC", which provides an appsettings structure and a fully implemented dependency injection. For avoiding errors, the service uses the ASP.Net standard dependency resolver.   
+After the appsettings is read and the containing classes are registered, the service will fill the missing package, which are needed to run the server.   
+The standard values are:
+* Bank.Communication.Infrastructure.Contract.Ebics.IEbicsRequest - Bank.Communication.Application.Worker.EbicsRequestWorker   
+* Bank.Communication.Domain.Contract.Ebics.IRequestValidator - Bank.Communication.Domain.Ebics.RequestValidator   
+* Bank.Communication.Domain.Contract.Ebics.ISchemaSelector - Bank.Communication.Domain.Ebics.SchemaSelector   
+* Bank.Communication.Application.Contract.Handler.IEbicsHandler - Bank.Communication.Application.Handler.EbicsHandler   
+* Bank.Communication.Domain.Contract.Storage.IStorageProvider - Bank.Communication.Domain.Storage.StorageProvider   
+
+3 types will not be registered by standard:
+* Bank.Communication.Infrastructure.Contract.Storage.IAdministrationStorage   
+* Bank.Communication.Infrastructure.Contract.Storage.INonceStorage   
+* Bank.Communication.Infrastructure.Contract.Storage.ITransactionStorage   
+
+The 3 types define the persistent storage of the bank server and has to be configured by the user. The user can decide which persistent storage will fit at best (i.e. MS SQL, Redis, MongoDB).
+The appsettings structure documentation is online: www.github.com/Monnick/SimpleIOC
+## Runtime / Controller
+The server uses 1 controller to handle all incomming traffic. This controller supports 2 verbs:
+* GET: To show the version info. This verb is the standard route and does not need the whole correct path.   
+* POST: To process an EBICS transaction (i.e. EBICS request for payment or bank to customer data).   
+
+## Paths / Routes
+The controller is named ebics and the payment method is called ebics. Both routes (get and post) are:
+* GET: HOST/ or HOST/ebics or HOST/ebics/payment   
+* POST: HOST/ebics/ebics   
