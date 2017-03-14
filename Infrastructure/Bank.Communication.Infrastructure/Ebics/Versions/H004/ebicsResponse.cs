@@ -4,12 +4,6 @@ namespace Bank.Communication.Infrastructure.Ebics.Versions.H004
 {
 	public partial class ebicsResponse : IEbicsResponse
 	{
-		public IEbicsResponseHeader Header
-		{
-			get
-			{
-				return header;
-			}
-		}
+		public IEbicsResponseHeader Header => header;
 	}
 }
