@@ -8,21 +8,9 @@ namespace Bank.Communication.Infrastructure.Ebics.Versions.H004
 {
 	public partial class ebicsRequest : IEbicsRequest
 	{
-		public IEbicsRequestHeader Header
-		{
-			get
-			{
-				return header;
-			}
-		}
+		public IEbicsRequestHeader Header => header;
 
-		public Type IdentifingType
-		{
-			get
-			{
-				return typeof(IEbicsRequest);
-			}
-		}
+		public Type IdentifingType => typeof(IEbicsRequest);
 
 		public IEnumerable<IValidationData> FormatValidationData()
 		{
