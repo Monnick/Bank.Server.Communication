@@ -8,140 +8,50 @@ namespace Bank.Communication.Infrastructure.Ebics.Versions.H004
 {
 	public partial class ebicsResponseHeader : IEbicsResponseHeader
 	{
-		public int NumSegments
-		{
-			get
-			{
-				return string.IsNullOrEmpty(mutable?.SegmentNumber?.Value) ? 0 : int.Parse(mutable.SegmentNumber.Value);
-			}
-		}
+		public int NumSegments => string.IsNullOrEmpty(mutable?.SegmentNumber?.Value) ? 0 : int.Parse(mutable.SegmentNumber.Value);
 
-		public string ReportText
-		{
-			get
-			{
-				return mutable?.ReportText;
-			}
-		}
+		public string ReportText => mutable?.ReportText;
 
-		public string ReturnCode
-		{
-			get
-			{
-				return mutable?.ReturnCode;
-			}
-		}
+		public string ReturnCode => mutable?.ReturnCode;
 
-		public byte[] TransactionID
-		{
-			get
-			{
-				return @static?.TransactionID;
-			}
-		}
+		public byte[] TransactionID => @static?.TransactionID;
 
-		public TransactionPhase TransactionPhase
-		{
-			get
-			{
-				return (TransactionPhase)mutable?.TransactionPhase;
-			}
-		}
+		public TransactionPhase TransactionPhase => (TransactionPhase)mutable?.TransactionPhase;
 	}
 
 	public partial class ebicsRequestHeader : IEbicsRequestHeader
 	{
-		public string HostID
-		{
-			get
-			{
-				return @static?.HostID;
-			}
-		}
+		public string HostID => @static?.HostID;
 
-		public int NumSegments
-		{
-			get
-			{
-				return string.IsNullOrEmpty(mutable?.SegmentNumber?.Value) ? 0 : int.Parse(mutable.SegmentNumber.Value);
-			}
-		}
+		public int NumSegments => string.IsNullOrEmpty(mutable?.SegmentNumber?.Value) ? 0 : int.Parse(mutable.SegmentNumber.Value);
 
-		public string PartnerID
-		{
-			get
-			{
-				return XmlPolymorphicArrayHelper.GetItem(@static.Items, @static.ItemsElementName, ItemsChoiceType3.PartnerID)?.ToString();
-			}
-		}
+		public string PartnerID => XmlPolymorphicArrayHelper.GetItem(@static.Items, @static.ItemsElementName, ItemsChoiceType3.PartnerID)?.ToString();
 
-		public TransactionPhase TransactionPhase
-		{
-			get
-			{
-				return (TransactionPhase)mutable.TransactionPhase;
-			}
-		}
+		public TransactionPhase TransactionPhase => (TransactionPhase)mutable.TransactionPhase;
 
-		public string UserID
-		{
-			get
-			{
-				return XmlPolymorphicArrayHelper.GetItem(@static.Items, @static.ItemsElementName, ItemsChoiceType3.UserID)?.ToString();
-			}
-		}
+		public string UserID => XmlPolymorphicArrayHelper.GetItem(@static.Items, @static.ItemsElementName, ItemsChoiceType3.UserID)?.ToString();
 
-		public IOrderDetails OrderDetails
-		{
-			get
-			{
-				return XmlPolymorphicArrayHelper.GetItem(@static.Items, @static.ItemsElementName, ItemsChoiceType3.OrderDetails) as IOrderDetails;
-			}
-		}
+		public IOrderDetails OrderDetails => XmlPolymorphicArrayHelper.GetItem(@static.Items, @static.ItemsElementName, ItemsChoiceType3.OrderDetails) as IOrderDetails;
 
-		public byte[] Nonce
-		{
-			get
-			{
-				return XmlPolymorphicArrayHelper.GetItem(@static.Items, @static.ItemsElementName, ItemsChoiceType3.Nonce) as byte[];
-			}
-		}
+		public byte[] Nonce => XmlPolymorphicArrayHelper.GetItem(@static.Items, @static.ItemsElementName, ItemsChoiceType3.Nonce) as byte[];
 
 		public DateTime Timestamp
 		{
 			get
 			{
 				var data = XmlPolymorphicArrayHelper.GetItem(@static.Items, @static.ItemsElementName, ItemsChoiceType3.Timestamp);
-				return data == null ? DateTime.MinValue : (DateTime)data;
+				return (DateTime?) data ?? DateTime.MinValue;
 			}
 		}
 
-		public byte[] TransactionID
-		{
-			get
-			{
-				return XmlPolymorphicArrayHelper.GetItem(@static.Items, @static.ItemsElementName, ItemsChoiceType3.TransactionID) as byte[];
-			}
-		}
+		public byte[] TransactionID => XmlPolymorphicArrayHelper.GetItem(@static.Items, @static.ItemsElementName, ItemsChoiceType3.TransactionID) as byte[];
 	}
 
 	public partial class StaticHeaderOrderDetailsType : IOrderDetails
 	{
-		string IOrderDetails.OrderAttribute
-		{
-			get
-			{
-				return OrderAttribute.ToString();
-			}
-		}
+		string IOrderDetails.OrderAttribute => OrderAttribute.ToString();
 
-		string IOrderDetails.OrderType
-		{
-			get
-			{
-				return OrderType?.Value;
-			}
-		}
+		string IOrderDetails.OrderType => OrderType?.Value;
 
 		public bool IsOrderData()
 		{
