@@ -46,6 +46,10 @@ namespace Bank.Server.Communication
 			});
 		}
 
+		/// <summary>
+		/// Reads and registers all services from the appsettings file.
+		/// </summary>
+		/// <param name="services">The services collection to create a dependency dependency injection from .Net core</param>
 		private void RegisterConfiguration(IServiceCollection services)
 		{
 			var config = ReadConfiguration();
@@ -58,6 +62,10 @@ namespace Bank.Server.Communication
 			RegisterMinimalConfiguration(services, config);
 		}
 
+		/// <summary>
+		/// Reads the configuration from the appsettings file.
+		/// </summary>
+		/// <returns>The services configuration</returns>
 		private DIConfiguration ReadConfiguration()
 		{
 			var iocConfig = new DIConfiguration();
@@ -70,8 +78,8 @@ namespace Bank.Server.Communication
 		/// <summary>
 		/// Registers the minimal configuration to run the service.
 		/// </summary>
-		/// <param name="services"></param>
-		/// <param name="config"></param>
+		/// <param name="services">The services collection for dependency injection</param>
+		/// <param name="config">The configuration to check, which services are already registered</param>
 		private void RegisterMinimalConfiguration(IServiceCollection services, DIConfiguration config)
 		{
 			Type contract = typeof(Bank.Communication.Infrastructure.Contract.Ebics.IEbicsRequest);
