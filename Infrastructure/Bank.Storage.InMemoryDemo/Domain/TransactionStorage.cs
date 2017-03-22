@@ -79,5 +79,10 @@ namespace Bank.Storage.InMemoryDemo.Domain
 
 			return TechnicalReturnCode.EBICS_OK;
 		}
+
+		public bool TransactionExists(byte[] transactionID, IBank bankUser)
+		{
+			return Store.Get(transactionID) != null;
+		}
 	}
 }

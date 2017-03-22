@@ -2,7 +2,7 @@
 
 namespace Bank.Communication.Infrastructure.Contract.Ebics.Composed
 {
-	public interface IInitialHeader : IPartnerContainer, IUserContainer, IOrderDetailsContainer, INonceContainer, INumberSegmentContainer
+	public interface IInitialHeader : IPartnerContainer, IHostContainer, IUserContainer, IOrderDetailsContainer, INonceContainer, INumberSegmentContainer
 	{
 	}
 }

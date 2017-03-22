@@ -2,7 +2,7 @@
 
 namespace Bank.Communication.Infrastructure.Contract.Ebics.Composed
 {
-	public interface IUserIdentificator : IHostContainer, IPartnerContainer, IUserContainer
+	public interface IRecurrentHeader : IHostContainer, ITransactionPhaseContainer, ITransactionIDContainer
 	{
 	}
 }

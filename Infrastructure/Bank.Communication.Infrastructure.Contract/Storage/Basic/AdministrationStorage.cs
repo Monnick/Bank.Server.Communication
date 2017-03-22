@@ -6,7 +6,7 @@ namespace Bank.Communication.Infrastructure.Contract.Storage.Basic
 {
 	public abstract class AdministrationStorage : IAdministrationStorage
 	{
-		public TechnicalReturnCode ValidateBankConfiguration(IBank bank)
+		public virtual TechnicalReturnCode ExistsBankConfiguration(IBank bank)
 		{
 			if (!ExistsBank(bank))
 				return TechnicalReturnCode.EBICS_INVALID_HOST_ID;
@@ -17,35 +17,64 @@ namespace Bank.Communication.Infrastructure.Contract.Storage.Basic
 			if (!ExistsUser(bank))
 				return TechnicalReturnCode.EBICS_USER_UNKOWN;
 
-			if (!IsUserValid(bank))
+			if (IsUserLocked(bank))
 				return TechnicalReturnCode.EBICS_INVALID_USER_OR_STATE;
 
 			return TechnicalReturnCode.EBICS_OK;
 		}
 
-		public TechnicalReturnCode ValidateOrderDetails(IBank bank, IOrderDetails orderDetails)
+		public virtual TechnicalReturnCode OrderDetailsUnlocked(IBank bank, IOrderDetails orderDetails)
 		{
 			if (!ExistsOrderType(orderDetails))
 				return TechnicalReturnCode.EBICS_UNSUPPORTED_ORDER_TYPE;
 
-			if (!IsOrderValid(bank, orderDetails))
+			if (!IsOrderTypeUnlocked(bank, orderDetails))
 				return TechnicalReturnCode.EBICS_INVALID_ORDER_TYPE;
 
 			return TechnicalReturnCode.EBICS_OK;
 		}
 
+		/// <summary>
+		/// Checks whether the user is registered to this bank.
+		/// </summary>
+		/// <param name="bank">The bank/partner/user configuration to check</param>
+		/// <returns>True if the user exists</returns>
 		protected abstract bool ExistsUser(IBank bank);
 
-		protected abstract bool IsUserValid(IBank bank);
+		/// <summary>
+		/// Is the user at the bank configuration unlocked to use the order type?
+		/// </summary>
+		/// <param name="bank">The bank/partner/user configuration to check</param>
+		/// <param name="orderDetails">The order details to check</param>
+		/// <returns>True if the user can use the order details</returns>
+		protected abstract bool IsOrderTypeUnlocked(IBank bank, IOrderDetails orderDetails);
 
-		protected abstract bool IsOrderValid(IBank bank, IOrderDetails orderDetails);
+		/// <summary>
+		/// Isn the user locked or any other state forbidden to participate in bank communication?
+		/// </summary>
+		/// <param name="bank">The bank/partner/user to check</param>
+		/// <returns>True if the user is locked or something similar</returns>
+		protected abstract bool IsUserLocked(IBank bank);
 
+		/// <summary>
+		/// Checks whether the order details configuration exists at this server.
+		/// </summary>
+		/// <param name="orderDetails">The order details to check</param>
+		/// <returns>True if the order details exists</returns>
 		protected abstract bool ExistsOrderType(IOrderDetails orderDetails);
 
+		/// <summary>
+		/// Checks whether the bank is registered.
+		/// </summary>
+		/// <param name="bank">The bank/partner/user configuration to check</param>
+		/// <returns>True if the bank exists</returns>
 		protected abstract bool ExistsBank(IBank bank);
 
+		/// <summary>
+		/// Checks whether the partner is registered to this bank.
+		/// </summary>
+		/// <param name="bank">The bank/partner/user configuration to check</param>
+		/// <returns>True if the partner exists</returns>
 		protected abstract bool ExistsPartner(IBank bank);
-
-		public abstract TechnicalReturnCode ValidateLocalConfiguration(IEbicsRequestHeader header);
 	}
 }

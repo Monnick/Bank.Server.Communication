@@ -1,8 +1,10 @@
 ﻿using Bank.Communication.Domain.Contract.Ebics;
 using Bank.Communication.Domain.Contract.Storage;
 using Bank.Communication.Infrastructure.Contract;
+using Bank.Communication.Infrastructure.Contract.DataContainer;
 using Bank.Communication.Infrastructure.Contract.Ebics;
 using Bank.Communication.Infrastructure.Contract.Ebics.Basic;
+using Bank.Communication.Infrastructure.Contract.Ebics.Composed;
 using System;
 
 namespace Bank.Communication.Domain.Ebics
@@ -15,36 +17,55 @@ namespace Bank.Communication.Domain.Ebics
 		{
 			Provider = provider;
 		}
-
-		public ActionResult Validate(IEbicsRequest request)
+		
+		public TechnicalReturnCode Validate(IEbicsRequest request)
 		{
-			ActionResult result = Provider.ValidateRequestHeader(request.Header);
-			if (!result.Success)
-				return result;
+			TechnicalReturnCode result = TechnicalReturnCode.EBICS_OK;
 
 			if (request.Header.TransactionID != null && request.Header.Nonce == null) // continue transaction
 			{
-				Infrastructure.Contract.DataContainer.ITransactionIDContainer transactionID = request.Header;
+				result = result != TechnicalReturnCode.EBICS_OK ? ValidateRecurrentHeader(request.Header) : result;
 
-				result = result.Success ? Provider.ValidateTransaction(transactionID) : result;
+				result = result != TechnicalReturnCode.EBICS_OK ? ValidateTransaction(request.Header) : result;
 
-				return new ActionResult(TechnicalReturnCode.EBICS_OK);
+				return result;
 			}
 			else if (request.Header.TransactionID == null && request.Header.Nonce != null) // new transaction
 			{
-				Infrastructure.Contract.Ebics.Composed.IInitialHeader header = request.Header;
+				if (string.IsNullOrEmpty(request.Header?.OrderDetails?.OrderID) && request.Header?.OrderDetails?.IsOrderData() == true)
+					return TechnicalReturnCode.EBICS_INCOMPATIBLE_ORDER_ATTRIBUTE;
 
-				if (result.Success && string.IsNullOrEmpty(header.OrderDetails.OrderID) && header.OrderDetails.IsOrderData())
-					result = new ActionResult(TechnicalReturnCode.EBICS_INCOMPATIBLE_ORDER_ATTRIBUTE);
+				result = result != TechnicalReturnCode.EBICS_OK ? ValidateInitialHeader(request.Header) : result;
 
-				result = result.Success ? Provider.ValidateInitialHeader(header) : result;
+				result = result != TechnicalReturnCode.EBICS_OK ? Provider.AddNonce(request.Header, new TimeSpan(6, 0, 0)) : result;
 
-				result = result.Success ? Provider.AddNonce(header, new TimeSpan(6, 0, 0)) : result;
-
-				return new ActionResult(TechnicalReturnCode.EBICS_OK);
+				return result;
 			}
 
-			return new ActionResult(TechnicalReturnCode.EBICS_INTERNAL_ERROR);
+			return TechnicalReturnCode.EBICS_INTERNAL_ERROR;
+		}
+
+		public TechnicalReturnCode ValidateTransaction(ITransactionIDContainer transactionID)
+		{
+			throw new NotImplementedException();
+		}
+
+		public TechnicalReturnCode ValidateRecurrentHeader(IRecurrentHeader header)
+		{
+			throw new NotImplementedException();
+		}
+
+		public TechnicalReturnCode ValidateInitialHeader(IInitialHeader header)
+		{
+			TechnicalReturnCode result = TechnicalReturnCode.EBICS_OK;
+
+			Infrastructure.Ebics.Bank bankData = new Infrastructure.Ebics.Bank(header);
+
+			result = result != TechnicalReturnCode.EBICS_OK ? Provider.Administration.ExistsBankConfiguration(bankData) : result;
+
+			result = result != TechnicalReturnCode.EBICS_OK ? Provider.Administration.OrderDetailsUnlocked(bankData, header?.OrderDetails) : result;
+
+			throw new NotImplementedException();
 		}
 	}
 }

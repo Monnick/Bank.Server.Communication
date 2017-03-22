@@ -1,6 +1,7 @@
-﻿using Bank.Communication.Infrastructure.Contract.DataContainer;
+﻿using Bank.Communication.Infrastructure.Contract;
+using Bank.Communication.Infrastructure.Contract.Administration;
+using Bank.Communication.Infrastructure.Contract.DataContainer;
 using Bank.Communication.Infrastructure.Contract.Ebics;
-using Bank.Communication.Infrastructure.Contract.Ebics.Basic;
 using Bank.Communication.Infrastructure.Contract.Ebics.Composed;
 using Bank.Communication.Infrastructure.Contract.Storage;
 using System;
@@ -32,35 +33,30 @@ namespace Bank.Communication.Domain.Contract.Storage
 		/// </summary>
 		/// <param name="activity">The request to store</param>
 		/// <returns>An action result with the result state</returns>
-		ActionResult StoreRequest(IEbicsRequest activity);
-
-		/// <summary>
-		/// Validates a transaction ID to check, if the ID already exists. 
-		/// </summary>
-		/// <param name="transactionID">The ID to check</param>
-		/// <returns>An action result with the result state</returns>
-		ActionResult ValidateTransaction(ITransactionIDContainer transactionID);
-
-		/// <summary>
-		/// Validates the header for reccuring data transmittion.
-		/// </summary>
-		/// <param name="header">The header with all needed information to validate</param>
-		/// <returns>An action result with the result state</returns>
-		ActionResult ValidateRequestHeader(IEbicsRequestHeader header);
-
-		/// <summary>
-		/// Validates an initial header data set, with more data structures than the recurrent header data.
-		/// </summary>
-		/// <param name="header">The header to validate</param>
-		/// <returns>An action result with the result state</returns>
-		ActionResult ValidateInitialHeader(IInitialHeader header);
-
+		TechnicalReturnCode StoreRequest(IEbicsRequest activity);
+		
 		/// <summary>
 		/// Adds a nonce to the storage for repetition awarness.
 		/// </summary>
 		/// <param name="nonce">The nonce data to store</param>
 		/// <param name="maxTimeDifference">The time span a nonce is allowed to life</param>
 		/// <returns>An action result with the result state</returns>
-		ActionResult AddNonce(INonceContainer nonce, TimeSpan maxTimeDifference);
+		TechnicalReturnCode AddNonce(INonceContainer nonce, TimeSpan maxTimeDifference);
+
+		/// <summary>
+		/// Check whether a transaction id already exists. Attention: A transaction id can be used twice or mire, but only once for each bank!
+		/// </summary>
+		/// <param name="bank">The bank to initially process the transaction</param>
+		/// <param name="transaction">The transaction id container to check</param>
+		/// <returns></returns>
+		bool TransactionExists(IBank bank, ITransactionIDContainer transaction);
+		
+		/// <summary>
+		/// Check whether a order detail is unlocked for a bank/partner/user configuration.
+		/// </summary>
+		/// <param name="bank">The bank/partner/user configuration to look for</param>
+		/// <param name="orderDetails">The order detail with detailed information to be unlocked by bank administration</param>
+		/// <returns></returns>
+		TechnicalReturnCode IsOrderDetailUnlocked(IBank bank, IOrderDetails orderDetails);
 	}
 }

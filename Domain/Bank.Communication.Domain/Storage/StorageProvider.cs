@@ -5,6 +5,8 @@ using Bank.Communication.Infrastructure.Contract.Ebics.Basic;
 using Bank.Communication.Infrastructure.Contract.Ebics.Composed;
 using Bank.Communication.Infrastructure.Contract.Storage;
 using System;
+using Bank.Communication.Infrastructure.Contract;
+using Bank.Communication.Infrastructure.Contract.Administration;
 
 namespace Bank.Communication.Domain.Storage
 {
@@ -23,27 +25,22 @@ namespace Bank.Communication.Domain.Storage
 			Transactions = transactions;
 		}
 
-		public ActionResult StoreRequest(IEbicsRequest activity)
+		public TechnicalReturnCode StoreRequest(IEbicsRequest activity)
 		{
 			throw new NotImplementedException();
 		}
 
-		public ActionResult ValidateTransaction(ITransactionIDContainer transactionID)
+		public TechnicalReturnCode AddNonce(INonceContainer nonce, TimeSpan maxTimeDifference)
 		{
 			throw new NotImplementedException();
 		}
 
-		public ActionResult ValidateRequestHeader(IEbicsRequestHeader header)
+		public bool TransactionExists(IBank bank, ITransactionIDContainer transaction)
 		{
-			throw new NotImplementedException();
+			return Transactions.TransactionExists(transaction.TransactionID, bank);
 		}
 
-		public ActionResult ValidateInitialHeader(IInitialHeader header)
-		{
-			throw new NotImplementedException();
-		}
-
-		public ActionResult AddNonce(INonceContainer nonce, TimeSpan maxTimeDifference)
+		public TechnicalReturnCode IsOrderDetailUnlocked(IBank bank, IOrderDetails orderDetails)
 		{
 			throw new NotImplementedException();
 		}

@@ -15,12 +15,7 @@ namespace Bank.Storage.InMemoryDemo.Domain
 		{
 			get { return _store.Value; }
 		}
-
-		public override TechnicalReturnCode ValidateLocalConfiguration(IEbicsRequestHeader header)
-		{
-			throw new NotImplementedException();
-		}
-
+		
 		protected override bool ExistsBank(IBank bank)
 		{
 			throw new NotImplementedException();
@@ -41,12 +36,12 @@ namespace Bank.Storage.InMemoryDemo.Domain
 			throw new NotImplementedException();
 		}
 
-		protected override bool IsOrderValid(IBank bank, IOrderDetails orderDetails)
+		protected override bool IsOrderTypeUnlocked(IBank bank, IOrderDetails orderDetails)
 		{
 			throw new NotImplementedException();
 		}
 
-		protected override bool IsUserValid(IBank bank)
+		protected override bool IsUserLocked(IBank bank)
 		{
 			throw new NotImplementedException();
 		}

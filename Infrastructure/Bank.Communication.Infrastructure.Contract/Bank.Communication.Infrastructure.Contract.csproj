@@ -15,7 +15,6 @@
     <Folder Include="Administration\" />
     <Folder Include="DataContainer\" />
     <Folder Include="Ebics\Basic\" />
-    <Folder Include="Ebics\Composed\" />
     <Folder Include="Storage\Basic\" />
   </ItemGroup>
 

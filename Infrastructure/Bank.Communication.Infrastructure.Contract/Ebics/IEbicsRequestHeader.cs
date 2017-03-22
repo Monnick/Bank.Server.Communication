@@ -3,7 +3,7 @@ using Bank.Communication.Infrastructure.Contract.DataContainer;
 
 namespace Bank.Communication.Infrastructure.Contract.Ebics
 {
-	public interface IEbicsRequestHeader : IHostContainer, ITransactionPhaseContainer, IInitialHeader, ITransactionIDContainer
+	public interface IEbicsRequestHeader : IRecurrentHeader, IInitialHeader
 	{
 	}
 }

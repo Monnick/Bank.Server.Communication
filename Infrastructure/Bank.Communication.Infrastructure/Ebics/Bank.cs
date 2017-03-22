@@ -1,4 +1,5 @@
 ﻿using Bank.Communication.Infrastructure.Contract.Administration;
+using Bank.Communication.Infrastructure.Contract.Ebics.Composed;
 
 namespace Bank.Communication.Infrastructure.Ebics
 {
@@ -7,6 +8,10 @@ namespace Bank.Communication.Infrastructure.Ebics
 		public string HostID { get; }
 
 		public IPartner Partner { get; }
+
+		public Bank(IInitialHeader header)
+			: this(header?.HostID, header?.PartnerID, header?.UserID)
+		{ }
 
 		public Bank(string hostID, string partnerID, string userID)
 		{
