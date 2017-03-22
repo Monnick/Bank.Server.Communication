@@ -4,13 +4,13 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using SimpleIOC.Configuration;
+using LightweightIOC.Configuration;
 
 namespace Bank.Server.Communication
 {
 	public class Startup
-    {
-        public IConfigurationRoot Configuration { get; }
+	{
+		public IConfigurationRoot Configuration { get; }
 		
 		public Startup(IHostingEnvironment env)
 		{
