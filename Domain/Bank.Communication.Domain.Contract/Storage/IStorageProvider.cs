@@ -48,15 +48,15 @@ namespace Bank.Communication.Domain.Contract.Storage
 		/// </summary>
 		/// <param name="bank">The bank to initially process the transaction</param>
 		/// <param name="transaction">The transaction id container to check</param>
-		/// <returns></returns>
-		bool TransactionExists(IBank bank, ITransactionIDContainer transaction);
-		
+		/// <returns>An action result with the result state</returns>
+		TechnicalReturnCode TransactionExists(IBank bank, ITransactionIDContainer transaction);
+
 		/// <summary>
 		/// Check whether a order detail is unlocked for a bank/partner/user configuration.
 		/// </summary>
 		/// <param name="bank">The bank/partner/user configuration to look for</param>
 		/// <param name="orderDetails">The order detail with detailed information to be unlocked by bank administration</param>
-		/// <returns></returns>
+		/// <returns>An action result with the result state</returns>
 		TechnicalReturnCode IsOrderDetailUnlocked(IBank bank, IOrderDetails orderDetails);
 	}
 }

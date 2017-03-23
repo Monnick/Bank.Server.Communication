@@ -35,9 +35,9 @@ namespace Bank.Communication.Domain.Storage
 			throw new NotImplementedException();
 		}
 
-		public bool TransactionExists(IBank bank, ITransactionIDContainer transaction)
+		public TechnicalReturnCode TransactionExists(IBank bank, ITransactionIDContainer transaction)
 		{
-			return Transactions.TransactionExists(transaction.TransactionID, bank);
+			return Transactions.TransactionExists(transaction.TransactionID, bank) ? TechnicalReturnCode.EBICS_OK : TechnicalReturnCode.EBICS_TX_UNKOWN_TXID;
 		}
 
 		public TechnicalReturnCode IsOrderDetailUnlocked(IBank bank, IOrderDetails orderDetails)

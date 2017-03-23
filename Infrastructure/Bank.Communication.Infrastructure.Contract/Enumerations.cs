@@ -90,4 +90,12 @@
 		EBICS_INVALID_SIGNER_STATE = 091305,
 		EBICS_DUPLICATE_SIGNATURE = 091306
 	}
+
+	public enum KeyType
+	{
+		None = 0,
+		Signature = 1,
+		Authentication = 2,
+		Encryption = 4
+	}
 }

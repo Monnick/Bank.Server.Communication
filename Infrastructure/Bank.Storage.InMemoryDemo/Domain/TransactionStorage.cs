@@ -16,13 +16,19 @@ namespace Bank.Storage.InMemoryDemo.Domain
 			get { return _store.Value; }
 		}
 
-		public TechnicalReturnCode AddTransactionSegment(byte[] transactionID, IBank bankUser, int number, object data)
+		public TechnicalReturnCode AddTransactionSegment(byte[] transactionID, IBank bankUser, int number, byte[] data)
 		{
 			var entity = Store.Get(transactionID);
 
 			if (entity == null)
 				return TechnicalReturnCode.EBICS_TX_UNKOWN_TXID;
 
+			if (entity.Host?.Equals(bankUser.HostID) != true)
+				return TechnicalReturnCode.EBICS_INVALID_HOST_ID;
+
+			if (entity.Partner?.Equals(bankUser?.Partner.PartnerID) != true)
+				return TechnicalReturnCode.EBICS_PARTNER_ID_MISMATCH;
+			
 			if (entity.NumberOfSegments > entity.NumberOfStoredTransactions)
 				return TechnicalReturnCode.EBICS_TX_SEGMENT_NUMBER_EXCEEDED;
 
@@ -49,23 +55,7 @@ namespace Bank.Storage.InMemoryDemo.Domain
 
 			return TechnicalReturnCode.EBICS_OK;
 		}
-
-		public object LoadTransactionSegment(byte[] transactionID, IBank bankUser, int number)
-		{
-			var entity = Store.Get(transactionID);
-
-			if (entity == null)
-				return new NotImplementedException(TechnicalReturnCode.EBICS_TX_UNKOWN_TXID.ToString());
-
-			if (number > entity.NumberOfStoredTransactions)
-				return new NotImplementedException(TechnicalReturnCode.EBICS_TX_SEGMENT_NUMBER_EXCEEDED.ToString());
-
-			if (number < entity.NumberOfStoredTransactions)
-				return new NotImplementedException(TechnicalReturnCode.EBICS_TX_SEGMENT_NUMBER_UNDERRUN.ToString());
-
-			return entity.GetTransaction(number);
-		}
-
+		
 		public TechnicalReturnCode PrepareTransaction(byte[] transactionID, IBank bankUser, int numberOfSegments)
 		{
 			var entity = Store.Get(transactionID);
@@ -82,7 +72,41 @@ namespace Bank.Storage.InMemoryDemo.Domain
 
 		public bool TransactionExists(byte[] transactionID, IBank bankUser)
 		{
-			return Store.Get(transactionID) != null;
+			var entity = Store.Get(transactionID);
+
+			if (entity == null)
+				return false;
+
+			if (entity.Host?.Equals(bankUser.HostID) != true)
+				return false;
+
+			if (entity.Partner?.Equals(bankUser?.Partner.PartnerID) != true)
+				return false;
+
+			return true;
+		}
+		
+		public TechnicalReturnCode LoadTransactionSegment(byte[] transactionID, IBank bankUser, int number, out byte[] data)
+		{
+			data = null;
+			
+			var entity = Store.Get(transactionID);
+
+			if (entity == null)
+				return TechnicalReturnCode.EBICS_TX_UNKOWN_TXID;
+
+			if (entity.Host?.Equals(bankUser.HostID) != true)
+				return TechnicalReturnCode.EBICS_INVALID_HOST_ID;
+
+			if (entity.Partner?.Equals(bankUser?.Partner.PartnerID) != true)
+				return TechnicalReturnCode.EBICS_PARTNER_ID_MISMATCH;
+
+			if (number > entity.NumberOfStoredTransactions)
+				return TechnicalReturnCode.EBICS_TX_SEGMENT_NUMBER_EXCEEDED;
+			
+			data = entity.GetTransaction(number);
+
+			return TechnicalReturnCode.EBICS_OK;
 		}
 	}
 }

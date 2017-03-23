@@ -14,7 +14,7 @@ namespace Bank.Storage.InMemoryDemo.ValueObjects
 
 		public int NumberOfSegments { get; }
 
-		IList<KeyValuePair<int, object>> Transactions { get; }
+		Dictionary<int, byte[]> Transactions { get; }
 
 		public int NumberOfStoredTransactions { get { return Transactions.Count; } }
 
@@ -26,15 +26,15 @@ namespace Bank.Storage.InMemoryDemo.ValueObjects
 			NumberOfSegments = numberOfSegments;
 			TransactionID = transactionID;
 
-			Transactions = new List<KeyValuePair<int, object>>();
+			Transactions = new Dictionary<int, byte[]>();
 		}
 
-		public void AppendTransaction(int number, object data)
+		public void AppendTransaction(int number, byte[] data)
 		{
-			Transactions.Add(new KeyValuePair<int, object>(number, data));
+			Transactions.Add(number, data);
 		}
 
-		public object GetTransaction(int number)
+		public byte[] GetTransaction(int number)
 		{
 			return Transactions[number];
 		}

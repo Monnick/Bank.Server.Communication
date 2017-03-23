@@ -1,4 +1,5 @@
-﻿using Bank.Communication.Infrastructure.Contract.Administration;
+﻿using System;
+using Bank.Communication.Infrastructure.Contract.Administration;
 using Bank.Communication.Infrastructure.Contract.Ebics;
 using Bank.Communication.Infrastructure.Contract.Ebics.Composed;
 
@@ -76,5 +77,57 @@ namespace Bank.Communication.Infrastructure.Contract.Storage.Basic
 		/// <param name="bank">The bank/partner/user configuration to check</param>
 		/// <returns>True if the partner exists</returns>
 		protected abstract bool ExistsPartner(IBank bank);
+
+		/// <summary>
+		/// Checks whether the user keys already exists.
+		/// </summary>
+		/// <param name="bank">The bank/partner/user identification to check</param>
+		/// <param name="type">The key type to check</param>
+		/// <returns>True if the key is stored</returns>
+		protected abstract bool ExistsUserKey(IBank bank, KeyType type);
+
+		/// <summary>
+		/// Store the user key.
+		/// </summary>
+		/// <param name="bank">The bank/partner/user identification</param>
+		/// <param name="type">The key type to store</param>
+		/// <param name="keyContent">The actual key content</param>
+		/// <returns>True if the key had been successfully stored</returns>
+		protected abstract bool StoreUserKey(IBank bank, KeyType type, byte[] keyContent);
+
+		/// <summary>
+		/// Gets the user key from the storage
+		/// </summary>
+		/// <param name="bank">The bank/partner/user identification</param>
+		/// <param name="type">The key type to load</param>
+		/// <returns></returns>
+		protected abstract byte[] GetUserKey(IBank bank, KeyType type);
+
+		public TechnicalReturnCode AddUserKey(IBank bank, KeyType type, byte[] keyContent)
+		{
+			var keyExists = ExistsUserKey(bank, type);
+
+			if (!keyExists || IsUserLocked(bank)) // locked user can reinitialize
+			{
+				if (StoreUserKey(bank, type, keyContent))
+					return TechnicalReturnCode.EBICS_OK;
+
+				return TechnicalReturnCode.EBICS_INTERNAL_ERROR;
+			}
+
+			return TechnicalReturnCode.EBICS_INVALID_USER_STATE;
+		}
+
+		public TechnicalReturnCode LoadUserKey(IBank bank, KeyType type, out byte[] keyContent)
+		{
+			keyContent = null;
+
+			if (IsUserLocked(bank) || !ExistsUserKey(bank, type))
+				return TechnicalReturnCode.EBICS_INVALID_USER_STATE;
+
+			keyContent = GetUserKey(bank, type);
+
+			return TechnicalReturnCode.EBICS_OK;
+		}
 	}
 }
