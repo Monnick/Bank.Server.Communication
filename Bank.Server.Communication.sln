@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.4
+VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bank.Server.Communication", "Bank.Server.Communication\Bank.Server.Communication.csproj", "{A0614584-E9A1-4345-8FD8-02396CDC7110}"
 EndProject
@@ -24,6 +24,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bank.Communication.Infrastructure.Contract", "Infrastructure\Bank.Communication.Infrastructure.Contract\Bank.Communication.Infrastructure.Contract.csproj", "{58A23DC4-6EC7-4A86-B28C-57773D883F47}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bank.Storage.InMemoryDemo", "Infrastructure\Bank.Storage.InMemoryDemo\Bank.Storage.InMemoryDemo.csproj", "{A17FDA03-47FF-4795-A532-B6C4D10D2AE4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bank.Storage", "Bank.Storage\Bank.Storage.csproj", "{F8131EA3-A1BA-4B7B-89CB-EC83DB7DA3F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bank.Storage.Contract", "Bank.Storage.Contract\Bank.Storage.Contract.csproj", "{8B1DED71-DA46-420D-8F13-CD899687E005}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +67,14 @@ Global
 		{A17FDA03-47FF-4795-A532-B6C4D10D2AE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A17FDA03-47FF-4795-A532-B6C4D10D2AE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A17FDA03-47FF-4795-A532-B6C4D10D2AE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8131EA3-A1BA-4B7B-89CB-EC83DB7DA3F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8131EA3-A1BA-4B7B-89CB-EC83DB7DA3F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8131EA3-A1BA-4B7B-89CB-EC83DB7DA3F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8131EA3-A1BA-4B7B-89CB-EC83DB7DA3F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B1DED71-DA46-420D-8F13-CD899687E005}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B1DED71-DA46-420D-8F13-CD899687E005}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B1DED71-DA46-420D-8F13-CD899687E005}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B1DED71-DA46-420D-8F13-CD899687E005}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,5 +87,7 @@ Global
 		{9DEAE1C5-67FC-4751-BD0F-656667CA3A70} = {0636055D-99D0-4C6C-BA07-9A314160A653}
 		{58A23DC4-6EC7-4A86-B28C-57773D883F47} = {0636055D-99D0-4C6C-BA07-9A314160A653}
 		{A17FDA03-47FF-4795-A532-B6C4D10D2AE4} = {0636055D-99D0-4C6C-BA07-9A314160A653}
+		{F8131EA3-A1BA-4B7B-89CB-EC83DB7DA3F0} = {0636055D-99D0-4C6C-BA07-9A314160A653}
+		{8B1DED71-DA46-420D-8F13-CD899687E005} = {0636055D-99D0-4C6C-BA07-9A314160A653}
 	EndGlobalSection
 EndGlobal
